@@ -62,16 +62,20 @@ class MainMenu(ctk.CTkFrame):
         ).pack(pady=25)
 
         # Center card
-        card = Card(self)
+        # --- FIX APPLIED HERE ---
+        card = Card(self, width=400, height=300) # Set fixed size
+        card.pack_propagate(False)               # Prevent shrinking
         card.pack(pady=60, padx=40)
 
         ctk.CTkLabel(card, text="Choose Algorithm",
-                     font=("Helvetica", 20, "bold")).pack(pady=20)
+                     font=("Helvetica", 20, "bold")).pack(pady=(30, 20))
 
         CuteButton(card, text="Closest Pair of Points",
+                   width=280,
                    command=lambda: switch_page("closest")).pack(pady=15)
 
         CuteButton(card, text="Karatsuba Multiplication",
+                   width=280,
                    command=lambda: switch_page("karatsuba")).pack(pady=15)
 
 

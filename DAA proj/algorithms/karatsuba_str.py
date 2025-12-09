@@ -69,39 +69,40 @@ def multiply(A, B):
 
     return removeLeadingZeros(findSum(findSum(p + '0' * (2 * (n - n2)), r + '0' * (n - n2)), q))
 
-# --------------------------------------
-# Generate Random Inputs (100–150 digits)
-# --------------------------------------
-
-os.makedirs("karatsuba_string_inputs", exist_ok=True)
-os.makedirs("karatsuba_string_results", exist_ok=True)
-
 def random_big_int(num_digits):
     # ensure no leading zero
     first = str(random.randint(1, 9))
     rest = ''.join(str(random.randint(0, 9)) for _ in range(num_digits - 1))
     return first + rest
 
-for i in range(1, 11):
-    digits = random.randint(100, 150)
-    a = random_big_int(digits)
-    b = random_big_int(digits)
-    with open(f"karatsuba_string_inputs/input_{i}.txt", "w") as f:
-        f.write(f"{a}\n{b}\n")
+if __name__ == "__main__":
+    
+    # --------------------------------------
+    # Generate Random Inputs (100–150 digits)
+    # --------------------------------------
+    os.makedirs("karatsuba_string_inputs", exist_ok=True)
+    os.makedirs("karatsuba_string_results", exist_ok=True)
 
-print("✅ Generated 10 input files (100–150 digit integers) in 'karatsuba_string_inputs/'")
+    for i in range(1, 11):
+        digits = random.randint(100, 150)
+        a = random_big_int(digits)
+        b = random_big_int(digits)
+        with open(f"karatsuba_string_inputs/input_{i}.txt", "w") as f:
+            f.write(f"{a}\n{b}\n")
 
-# --------------------------------------
-# Apply Karatsuba Multiplication on All Datasets
-# --------------------------------------
+    print("Generated 10 input files (100-150 digit integers) in 'karatsuba_string_inputs/'")
 
-for i in range(1, 11):
-    with open(f"karatsuba_string_inputs/input_{i}.txt") as f:
-        A, B = [line.strip() for line in f.readlines()]
-        product = multiply(A, B)
-        print(f"Dataset {i}: Product starts with {product[:60]}...")
+    # --------------------------------------
+    # Apply Karatsuba Multiplication on All Datasets
+    # --------------------------------------
 
-    with open(f"karatsuba_string_results/result_{i}.txt", "w") as out:
-        out.write(f"Product for dataset {i}:\n{product}\n")
+    for i in range(1, 11):
+        with open(f"karatsuba_string_inputs/input_{i}.txt") as f:
+            A, B = [line.strip() for line in f.readlines()]
+            product = multiply(A, B)
+            print(f"Dataset {i}: Product starts with {product[:60]}...")
 
-print("✅ All results saved in 'karatsuba_string_results/'")
+        with open(f"karatsuba_string_results/result_{i}.txt", "w") as out:
+            out.write(f"Product for dataset {i}:\n{product}\n")
+
+    print("All results saved in 'karatsuba_string_results/'")

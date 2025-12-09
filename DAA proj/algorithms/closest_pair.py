@@ -37,25 +37,26 @@ def closest_pair(points):
     strip = [p for p in points if abs(p[0]-mid_point[0]) < d]
     return min(d, strip_closest(strip, d))
 
-os.makedirs("closest_inputs", exist_ok=True)
+if __name__ == "__main__":
+    os.makedirs("closest_inputs", exist_ok=True)
 
-for i in range(1, 11):
-    points = [(random.randint(0, 10000), random.randint(0, 10000)) for _ in range(100 + i*10)]
-    with open(f"closest_inputs/points_{i}.txt", "w") as f:
-        for x, y in points:
-            f.write(f"{x} {y}\n")
+    for i in range(1, 11):
+        points = [(random.randint(0, 10000), random.randint(0, 10000)) for _ in range(100 + i*10)]
+        with open(f"closest_inputs/points_{i}.txt", "w") as f:
+            for x, y in points:
+                f.write(f"{x} {y}\n")
 
-print("✅ Generated 10 input files for Closest Pair in folder: closest_inputs/")
+    print("Generated 10 input files for Closest Pair in folder: closest_inputs/")
 
-os.makedirs("closest_results", exist_ok=True)
+    os.makedirs("closest_results", exist_ok=True)
 
-for i in range(1, 11):
-    with open(f"closest_inputs/points_{i}.txt") as f:
-        points = [tuple(map(int, line.split())) for line in f.readlines()]
-        points.sort(key=lambda p: p[0])
-        min_dist = closest_pair(points)
-        print(f"Dataset {i} → Closest Distance: {min_dist:.4f}")
-        with open(f"closest_results/result_{i}.txt", "w") as out:
-            out.write(f"Closest Pair Distance for dataset {i}: {min_dist:.4f}\n")
+    for i in range(1, 11):
+        with open(f"closest_inputs/points_{i}.txt") as f:
+            points = [tuple(map(int, line.split())) for line in f.readlines()]
+            points.sort(key=lambda p: p[0])
+            min_dist = closest_pair(points)
+            print(f"Dataset {i} -> Closest Distance: {min_dist:.4f}")
+            with open(f"closest_results/result_{i}.txt", "w") as out:
+                out.write(f"Closest Pair Distance for dataset {i}: {min_dist:.4f}\n")
 
-print("✅ Results saved in: closest_results/")
+    print("Results saved in: closest_results/")
