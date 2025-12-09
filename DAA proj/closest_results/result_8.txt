@@ -1,0 +1,1 @@
+Closest Pair Distance for dataset 8: 16.2788

@@ -1,0 +1,1 @@
+Closest Pair Distance for dataset 1: 79.4040
